@@ -1,0 +1,62 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+  <mat-card>
+    <mat-form-field class="example-full-width">
+      <input matInput ngModel name="firstName" placeholder="First Name" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput ngModel name="lastName" placeholder="Last Name" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput type="email" ngModel name="email" placeholder="Email Address" required>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput type="password" ngModel name="passward" placeholder="Password" required>
+    </mat-form-field>
+    <label>Gender </label>
+    <mat-radio-group ngModel name="gender" aria-labelledby="example-radio-group-label" class="example-radio-group">
+      <mat-radio-button class="example-radio-button" value="Male">
+        Male
+      </mat-radio-button>
+      <mat-radio-button class="example-radio-button" value="Female">
+        Female
+      </mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="example-full-width">
+      <input matInput ngModel name="pNumber" placeholder="Phone Number" required>
+    </mat-form-field>
+    <mat-checkbox ngModel name="termCondition">Accept term and condition</mat-checkbox>
+    <tr></tr>
+    <button mat-raised-button>Submit</button>
+  </mat-card>
+</form>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="firstName">
+    <th mat-header-cell *matHeaderCellDef> First Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef> Email </th>
+    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="gender">
+    <th mat-header-cell *matHeaderCellDef> Gender </th>
+    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="pNumber">
+    <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+    <td mat-cell *matCellDef="let element"> {{element.pNumber}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
