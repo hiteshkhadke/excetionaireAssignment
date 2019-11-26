@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -7,35 +8,24 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  displayData = {
-    firstName: "",
-    lastName : "",
-    email : "",
-    gender : "",
-    pNumber : ""
-  };
-  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'gender','pNumber'];
+  displayedColumns: string[] = ['firstName', 'lastName', 'email', 'gender','pNumber','dateOfBirth'];
 
   gridDataList = [];
-  dataSource = [];
+  dataSource = new MatTableDataSource<any>(this.gridDataList);;
 
   onSubmit(form : NgForm){
-    
-    this.displayData.firstName = form.value.firstName;
-    this.displayData.lastName = form.value.lastName;
-    this.displayData.email = form.value.email;
-    this.displayData.gender = form.value.gender;
-    this.displayData.pNumber = form.value.pNumber;
 
-    console.log(this.displayData);
+    console.log(form.value);
     console.log(form);
-    if(form.status == "VALID"){
-      this.gridDataList.push(this.displayData);
+    if(form.status == "VALID" && form.value.termCondition){
+      this.gridDataList.push(form.value);
     }
     console.log(this.gridDataList);
-    this.dataSource = this.gridDataList;
+    this.dataSource =new MatTableDataSource<any>(this.gridDataList);;
+    console.log("===>", this.dataSource)
 
-    form.reset();
+    //form.reset();
+    form.resetForm();
   }
   
 }

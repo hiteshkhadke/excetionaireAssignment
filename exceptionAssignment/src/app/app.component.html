@@ -1,36 +1,48 @@
-<form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
-  <mat-card>
-    <mat-form-field class="example-full-width">
-      <input matInput ngModel name="firstName" placeholder="First Name" required>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput ngModel name="lastName" placeholder="Last Name" required>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput type="email" ngModel name="email" placeholder="Email Address" required>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <input matInput type="password" ngModel name="passward" placeholder="Password" required>
-    </mat-form-field>
-    <label>Gender </label>
-    <mat-radio-group ngModel name="gender" aria-labelledby="example-radio-group-label" class="example-radio-group">
-      <mat-radio-button class="example-radio-button" value="Male">
-        Male
-      </mat-radio-button>
-      <mat-radio-button class="example-radio-button" value="Female">
-        Female
-      </mat-radio-button>
-    </mat-radio-group>
-    <mat-form-field class="example-full-width">
-      <input matInput ngModel name="pNumber" placeholder="Phone Number" required>
-    </mat-form-field>
-    <mat-checkbox ngModel name="termCondition">Accept term and condition</mat-checkbox>
-    <tr></tr>
-    <button mat-raised-button>Submit</button>
-  </mat-card>
-</form>
+<div fxLayoutAlign="center">
+  <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+    <mat-card>
+      <mat-form-field class="example-full-width">
+        <input matInput ngModel name="firstName" placeholder="First Name" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput ngModel name="lastName" placeholder="Last Name" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput type="email" ngModel name="email" placeholder="Email Address" required>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput type="password" ngModel name="passward" placeholder="Password" required>
+      </mat-form-field>
+      <label>Gender </label>
+      <mat-radio-group ngModel name="gender" aria-labelledby="example-radio-group-label" class="example-radio-group">
+        <mat-radio-button class="example-radio-button" value="Male">
+          Male
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button" value="Female">
+          Female
+        </mat-radio-button>
+      </mat-radio-group>
+      <tr></tr>
+      <mat-form-field>
+        <input ngModel name="dateOfBirth" matInput [matDatepicker]="dateOfBirth" placeholder="DOB">
+        <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+        <mat-datepicker #dateOfBirth></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput  type="number" ngModel name="pNumber" placeholder="Phone Number" required>
+      </mat-form-field>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <input id="fileInput" ngModel name="img" type="file" class="ng-hide" multiple>
+      <tr></tr>
+      <mat-checkbox ngModel name="termCondition" required>Accept term and condition</mat-checkbox>
+      <tr></tr>
+      <button mat-raised-button>Submit</button>
+    </mat-card>
+  </form>
+</div>
+
+
+<table *ngIf="gridDataList.length>0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="firstName">
     <th mat-header-cell *matHeaderCellDef> First Name </th>
@@ -55,6 +67,11 @@
   <ng-container matColumnDef="pNumber">
     <th mat-header-cell *matHeaderCellDef> Phone Number </th>
     <td mat-cell *matCellDef="let element"> {{element.pNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dateOfBirth">
+    <th mat-header-cell *matHeaderCellDef> DOB </th>
+    <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date : 'dd MMM yyyy'}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
