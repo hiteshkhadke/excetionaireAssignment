@@ -8,6 +8,9 @@ import { MatTableDataSource } from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(){
+    console.log("hitesh");
+  }
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'gender','pNumber','dateOfBirth'];
 
   gridDataList = [];
